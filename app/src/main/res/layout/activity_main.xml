@@ -81,19 +81,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAlbumTitle" />
 
-        <ImageView
-            android:id="@+id/ivAlbumArt"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/album_art_background"
-            android:contentDescription="@string/album_art"
-            android:padding="16dp"
-            android:src="@drawable/ic_music_note"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:tint="@color/dark_gray" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabPlay"

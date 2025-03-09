@@ -129,31 +129,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadAudioFiles() {
-        // This would normally scan the device for audio files
-        // For simplicity, we'll create sample data
-
-        val englishAudios = listOf(
-            AudioFile("1", "Bohemian Rhapsody", "Queen", "A Night at the Opera", 355, "english"),
-            AudioFile("2", "Hotel California", "Eagles", "Hotel California", 390, "english"),
-            AudioFile("3", "Stairway to Heaven", "Led Zeppelin", "Led Zeppelin IV", 482, "english"),
-            AudioFile("4", "Imagine", "John Lennon", "Imagine", 183, "english"),
-            AudioFile("5", "Sweet Child O' Mine", "Guns N' Roses", "Appetite for Destruction", 356, "english"),
-            AudioFile("6", "Smells Like Teen Spirit", "Nirvana", "Nevermind", 301, "english"),
-            AudioFile("7", "November Rain", "Guns N' Roses", "Use Your Illusion I", 537, "english")
+        // Carga los números en inglés (1-10)
+        val englishNumbers = listOf(
+            AudioFile("1", "One", "Numbers", "English Numbers", 10, "english", R.raw.ingles1),
+            AudioFile("2", "Two", "Numbers", "English Numbers", 10, "english", R.raw.ingles2),
+            AudioFile("3", "Three", "Numbers", "English Numbers", 10, "english", R.raw.ingles3),
+            AudioFile("4", "Four", "Numbers", "English Numbers", 10, "english", R.raw.ingles4),
+            AudioFile("5", "Five", "Numbers", "English Numbers", 10, "english", R.raw.ingles5),
+            AudioFile("6", "Six", "Numbers", "English Numbers", 10, "english", R.raw.ingles6),
+            AudioFile("7", "Seven", "Numbers", "English Numbers", 10, "english", R.raw.ingles7),
+            AudioFile("8", "Eight", "Numbers", "English Numbers", 10, "english", R.raw.ingles8),
+            AudioFile("9", "Nine", "Numbers", "English Numbers", 10, "english", R.raw.ingles9),
+            AudioFile("10", "Ten", "Numbers", "English Numbers", 10, "english", R.raw.ingles10)
         )
 
-        val spanishAudios = listOf(
-            AudioFile("8", "Despacito", "Luis Fonsi", "Vida", 229, "spanish"),
-            AudioFile("9", "La Tortura", "Shakira", "Fijación Oral, Vol. 1", 213, "spanish"),
-            AudioFile("10", "Bailando", "Enrique Iglesias", "Sex and Love", 242, "spanish"),
-            AudioFile("11", "Gasolina", "Daddy Yankee", "Barrio Fino", 192, "spanish"),
-            AudioFile("12", "La Bicicleta", "Carlos Vives & Shakira", "Vives", 218, "spanish"),
-            AudioFile("13", "Vivir Mi Vida", "Marc Anthony", "3.0", 244, "spanish"),
-            AudioFile("14", "Danza Kuduro", "Don Omar", "Meet the Orphans", 219, "spanish")
+        // Carga los números en español (1-10)
+        val spanishNumbers = listOf(
+            AudioFile("11", "Uno", "Números", "Números en Español", 10, "spanish", R.raw.espanol1),
+            AudioFile("12", "Dos", "Números", "Números en Español", 10, "spanish", R.raw.espanol2),
+            AudioFile("13", "Tres", "Números", "Números en Español", 10, "spanish", R.raw.espanol3),
+            AudioFile("14", "Cuatro", "Números", "Números en Español", 10, "spanish", R.raw.espanol4),
+            AudioFile("15", "Cinco", "Números", "Números en Español", 10, "spanish", R.raw.espanol5),
+            AudioFile("16", "Seis", "Números", "Números en Español", 10, "spanish", R.raw.espanol6),
+            AudioFile("17", "Siete", "Números", "Números en Español", 10, "spanish", R.raw.espanol7),
+            AudioFile("18", "Ocho", "Números", "Números en Español", 10, "spanish", R.raw.espanol8),
+            AudioFile("19", "Nueve", "Números", "Números en Español", 10, "spanish", R.raw.espanol9),
+            AudioFile("20", "Diez", "Números", "Números en Español", 10, "spanish", R.raw.espanol10)
         )
 
         // Update fragments with audio lists
-        pagerAdapter.updateAudioLists(englishAudios, spanishAudios)
+        pagerAdapter.updateAudioLists(englishNumbers, spanishNumbers)
     }
 
     fun playAudio(audioFile: AudioFile) {
@@ -168,9 +173,8 @@ class MainActivity : AppCompatActivity() {
         // Release previous media player if exists
         mediaPlayer?.release()
 
-        // Create new media player
-        // In a real app, you would load the actual audio file
-        mediaPlayer = MediaPlayer.create(this, R.raw.sample_audio)
+        // Create new media player with the specific audio resource
+        mediaPlayer = MediaPlayer.create(this, audioFile.resourceId)
         mediaPlayer?.apply {
             seekBar.max = duration
             seekBar.progress = 0

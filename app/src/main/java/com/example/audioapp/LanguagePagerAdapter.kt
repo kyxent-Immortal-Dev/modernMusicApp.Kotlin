@@ -4,52 +4,36 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class LanguagePagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
+class LanguagePagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 
-    private val englishFragment = LanguageFragment()
-    private val spanishFragment = LanguageFragment()
+    private val englishFragment = AudioListFragment.newInstance("english")
+    private val spanishFragment = AudioListFragment.newInstance("spanish")
 
     private var englishAudios: List<AudioFile> = emptyList()
     private var spanishAudios: List<AudioFile> = emptyList()
 
-    init {
-        // Set listener for both fragments
-        val listener = object : LanguageFragment.AudioPlaybackListener {
-            override fun onAudioSelected(audioFile: AudioFile) {
-                (activity as? MainActivity)?.playAudio(audioFile)
-            }
-        }
-
-        englishFragment.setListener(listener)
-        spanishFragment.setListener(listener)
-    }
-
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
-        return when (position) {
-            0 -> englishFragment
-            1 -> spanishFragment
-            else -> throw IllegalArgumentException("Invalid position: $position")
-        }
+        return if (position == 0) englishFragment else spanishFragment
     }
 
-    fun updateAudioLists(english: List<AudioFile>, spanish: List<AudioFile>) {
-        englishAudios = english
-        spanishAudios = spanish
+    fun updateAudioLists(englishList: List<AudioFile>, spanishList: List<AudioFile>) {
+        englishAudios = englishList
+        spanishAudios = spanishList
 
-        englishFragment.setAudioFiles(englishAudios)
-        spanishFragment.setAudioFiles(spanishAudios)
+        englishFragment.updateAudioList(englishList)
+        spanishFragment.updateAudioList(spanishList)
     }
 
     fun updateEnglishAudios(audios: List<AudioFile>) {
         englishAudios = audios
-        englishFragment.setAudioFiles(englishAudios)
+        englishFragment.updateAudioList(audios)
     }
 
     fun updateSpanishAudios(audios: List<AudioFile>) {
         spanishAudios = audios
-        spanishFragment.setAudioFiles(spanishAudios)
+        spanishFragment.updateAudioList(audios)
     }
 
     fun getEnglishAudios(): List<AudioFile> = englishAudios
